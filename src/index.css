@@ -1185,3 +1185,397 @@ body::before {
   gap: 10px;
   margin-top: 20px;
 }
+
+/* ============================================
+   Back Button (Header)
+   ============================================ */
+
+.header__back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-bottom: 16px;
+}
+
+.header__back-btn:hover {
+  background: var(--surface-3);
+  color: var(--text-primary);
+  border-color: var(--primary-500);
+  transform: translateX(-4px);
+}
+
+/* ============================================
+   Tool Selector — Landing Page Cards
+   ============================================ */
+
+.tool-selector {
+  margin-top: 8px;
+}
+
+.tool-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.tool-card {
+  position: relative;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 0;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  overflow: hidden;
+  text-align: left;
+  font-family: var(--font-family);
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+}
+
+.tool-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.tool-card__glow {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 200px;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+.tool-card:hover .tool-card__glow {
+  opacity: 1;
+}
+
+.tool-card__content {
+  position: relative;
+  z-index: 1;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tool-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.tool-card__subtitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+
+.tool-card__title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.tool-card__description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.tool-card__features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tool-card__features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.tool-card__feature-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tool-card__cta {
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.tool-card:hover .tool-card__cta {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   Merger — Mode Selection Cards
+   ============================================ */
+
+.merge-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.merge-mode-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--surface-2);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+  font-family: var(--font-family);
+  color: inherit;
+  width: 100%;
+}
+
+.merge-mode-card:hover {
+  border-color: var(--border-default);
+  background: var(--surface-3);
+}
+
+.merge-mode-card--active {
+  border-color: var(--primary-500);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.merge-mode-card__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.merge-mode-card__text {
+  flex: 1;
+}
+
+.merge-mode-card__title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.merge-mode-card__description {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+.merge-mode-card__radio {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all var(--transition-fast);
+  font-size: 0.7rem;
+  color: transparent;
+}
+
+.merge-mode-card__radio--active {
+  border-color: var(--primary-500);
+  background: var(--primary-600);
+  color: white;
+}
+
+/* ============================================
+   Merger — Result Stats
+   ============================================ */
+
+.merge-result {
+  margin-top: 16px;
+}
+
+.merge-result__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.merge-result__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.merge-result__stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-400), var(--accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.merge-result__stat-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   VLOOKUP — Configuration Panels
+   ============================================ */
+
+.vlookup-config {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+.vlookup-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.vlookup-panel__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vlookup-panel__badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.vlookup-panel__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vlookup-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--text-tertiary);
+  padding-top: 60px;
+  font-weight: 300;
+}
+
+.vlookup-fuzzy-settings {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ============================================
+   Responsive — New Components
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .tool-selector__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .vlookup-config {
+    grid-template-columns: 1fr;
+  }
+
+  .vlookup-arrow {
+    padding-top: 0;
+    font-size: 1.5rem;
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .tool-selector__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .merge-result__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .vlookup-config {
+    grid-template-columns: 1fr;
+  }
+
+  .vlookup-arrow {
+    padding-top: 0;
+    transform: rotate(90deg);
+  }
+}

@@ -1,6 +1,6 @@
-# ≈ ExcelMatch Pro — Smart Excel Sheet Comparator
+# ≈ ExcelMatch Pro — Excel Power Tools Suite
 
-A powerful React-based web tool that lets you upload one, two, or more Excel sheets, select specific columns, and intelligently match similar cells across them — **even when there are small typos or spelling errors**.
+A powerful React-based web application with **3 Excel tools** in one: **Sheet Matcher**, **Multiple File Merger**, and **VLOOKUP** — all with intelligent fuzzy matching that catches typos and spelling errors.
 
 > For example: `"shubham"` and `"shuham"` will be detected as a **fuzzy match (~86% similarity)** instead of being treated as completely different values.
 
@@ -37,24 +37,24 @@ The optimized output will be in the `dist/` folder, ready to deploy.
 
 ---
 
-## ✨ Features
+## 🧰 Tools Overview
 
-### 📁 1. Multi-File Upload
-- **Drag & drop** or click to browse and upload Excel files
-- Supports **`.xlsx`**, **`.xls`**, and **`.csv`** formats
-- Upload **one, two, or more** files at once
-- Displays file metadata — size, number of sheets, total row count
-- Remove individual files with a single click
+The app features a sleek landing page with **3 tool cards** — click any card to open the tool.
 
-### 📊 2. Smart Column Selection
-- Automatically detects all columns (headers) from each uploaded file
-- Switch between **multiple sheets** within a single workbook
-- Select **any combination** of columns across different files to compare
-- Color-coded file cards for easy visual identification
-- Minimum of **2 columns** required to run a comparison
+---
 
-### 🔍 3. Fuzzy Matching Engine (Typo Detection)
-- Uses **Levenshtein Distance** algorithm to calculate similarity between cell values
+### 🔍 Tool 1: Excel Sheet Matcher
+
+**Fuzzy Match & Compare columns across multiple Excel files.**
+
+#### How It Works
+1. **Upload** one or more Excel files (.xlsx, .xls, .csv)
+2. **Select columns** from any file/sheet to compare
+3. **Configure** the fuzzy matching threshold (30% – 100%)
+4. **Run** the match and view results with diff highlighting
+
+#### Features
+- **Levenshtein distance** fuzzy matching algorithm
 - Catches common typos and spelling errors:
 
   | Value A      | Value B      | Similarity | Result       |
@@ -65,22 +65,55 @@ The optimized output will be in the `dist/` folder, ready to deploy.
   | `Apple`     | `Apple`     | 100%       | ✅ Exact Match |
   | `Apple`     | `Banana`    | ~17%       | ❌ No Match    |
 
-- **Configurable similarity threshold** via an interactive slider (30% – 100%)
-- Live preview shows exactly what the current threshold will and won't catch
+- **Configurable threshold slider** with live preview
+- **Character-level diff highlighting** — see exactly which characters differ
+- **Filter tabs** — All / Exact / Fuzzy / No Match
+- **Search** within results
+- **Export results** to Excel
 
-### 📋 4. Rich Results View
-- **Stats dashboard** — see exact, fuzzy, and unmatched counts at a glance
-- **Filter tabs** — quickly toggle between All / Exact / Fuzzy / No Match results
-- **Search bar** — find specific values within the results
-- **Character-level diff highlighting** — differences between matched values are highlighted in yellow so you can see exactly what's different
-- **Visual similarity bars** — color-coded percentage bars (green/yellow/red) for each match
-- **Row references** — shows exact row numbers from the source files
-- **Source tracking** — displays which file → sheet → column each value comes from
+---
 
-### 📥 5. Export Results
-- **Export to Excel** — download the full match results as a `.xlsx` file
-- Exported file includes: base value, matched value, similarity %, match type, source info, and row numbers
-- Auto-sized columns for readability
+### 🔗 Tool 2: Multiple Excel Merger
+
+**Combine two or more Excel files into a single output file.**
+
+#### Merge Modes
+
+| Mode | Description |
+|------|------------|
+| **📄 Append Rows** | Combines all rows from all files into one sheet. Columns with matching headers are aligned automatically. Adds source file/sheet columns for traceability. |
+| **📑 Separate Sheets** | Each source file becomes its own sheet in the output workbook. Preserves the original data structure completely. |
+| **🔗 Merge by Key** | Joins files side-by-side using a common key column (like a database JOIN). Rows with matching keys are combined into one row. |
+
+#### Features
+- Upload **unlimited** files to merge
+- Select which **sheet** to use from multi-sheet workbooks
+- **Smart column alignment** across files with different structures
+- **Download** the merged result as a single `.xlsx` file
+- Result stats showing file count, sheet count, and row count
+
+---
+
+### 🔎 Tool 3: Excel VLOOKUP
+
+**Perform VLOOKUP-style operations across Excel files — just like Excel's VLOOKUP function but with fuzzy matching.**
+
+#### How It Works
+1. **Upload** your source file (with lookup values) and target file (with data to pull)
+2. **Configure** the lookup:
+   - Select the **Lookup Column** from the source file
+   - Select the **Key Column** in the target file (to match against)
+   - Select which **Return Columns** to pull from the target
+3. **Enable/disable fuzzy matching** and set the threshold
+4. **Run** and view the enriched results
+
+#### Features
+- **Cross-file VLOOKUP** — lookup values from one file, pull data from another
+- **Fuzzy key matching** — catches typos in key values (optional, toggleable)
+- **Pull multiple return columns** at once
+- **Similarity scores** and match type indicators for every row
+- **Filter and search** results
+- **Export** the enriched lookup table to Excel
 
 ---
 
@@ -95,17 +128,21 @@ exel difference finder/
 │   └── favicon.svg               # Custom favicon (≈ symbol)
 └── src/
     ├── main.jsx                  # React entry point
-    ├── App.jsx                   # Main app — orchestrates the 3-step workflow
-    ├── index.css                 # Complete design system (dark theme, animations)
+    ├── App.jsx                   # App router — tool selector + back navigation
+    ├── index.css                 # Complete design system (dark theme, 1500+ lines)
     ├── components/
-    │   ├── Stepper.jsx           # Visual step progress indicator (1→2→3)
-    │   ├── FileUploader.jsx      # Drag & drop zone + uploaded file list
-    │   ├── ColumnSelector.jsx    # Per-file sheet switcher & column picker
-    │   ├── MatchSettings.jsx     # Similarity threshold slider with live preview
-    │   └── ResultsView.jsx       # Results table, filters, search, diff view, export
+    │   ├── ToolSelector.jsx      # Landing page with 3 tool cards
+    │   ├── MatcherTool.jsx       # 🔍 Sheet Matcher (full workflow)
+    │   ├── MergerTool.jsx        # 🔗 File Merger (3 merge modes)
+    │   ├── VlookupTool.jsx       # 🔎 VLOOKUP tool (cross-file lookup)
+    │   ├── Stepper.jsx           # Step progress indicator (1→2→3)
+    │   ├── FileUploader.jsx      # Drag & drop + file list (shared)
+    │   ├── ColumnSelector.jsx    # Per-file column picker (shared)
+    │   ├── MatchSettings.jsx     # Threshold slider (shared)
+    │   └── ResultsView.jsx       # Match results table (shared)
     └── utils/
-        ├── excelParser.js        # Excel/CSV parsing (read) & export (write)
-        └── fuzzyMatch.js         # Levenshtein distance & similarity matching engine
+        ├── excelParser.js        # Excel/CSV parsing & export
+        └── fuzzyMatch.js         # Levenshtein distance matching engine
 ```
 
 ---
@@ -126,6 +163,11 @@ similarity = 1 - (levenshtein_distance / max_length_of_both_strings)
 
 If the similarity meets or exceeds your configured threshold, the pair is flagged as a **fuzzy match**.
 
+This is used in all 3 tools:
+- **Matcher** — compares all selected columns fuzzy
+- **Merger** — "Merge by Key" mode can use exact key matching
+- **VLOOKUP** — optional fuzzy matching on key columns (toggleable)
+
 ---
 
 ## 🎨 Design & UI
@@ -134,6 +176,9 @@ If the similarity meets or exceeds your configured threshold, the pair is flagge
 - **Glassmorphism** cards with backdrop blur
 - **Inter** font family from Google Fonts
 - Smooth **micro-animations** — fade-in, slide-in, floating icons, pulsing indicators
+- **Tool cards** with gradient glow effects on hover
+- **Merge mode** radio cards with active state
+- **VLOOKUP** split-panel layout with arrow divider
 - Custom styled **scrollbars**
 - Fully **responsive** — works on desktop, tablet, and mobile
 - **Accessibility** — semantic HTML, proper heading hierarchy, unique element IDs
@@ -154,34 +199,36 @@ If the similarity meets or exceeds your configured threshold, the pair is flagge
 
 ## 📖 Usage Guide
 
-### Step 1 — Upload Your Files
-1. Drag and drop your Excel files onto the upload zone, or click to browse
-2. You can upload **any number** of files
-3. Each uploaded file shows its name, size, sheet count, and row count
+### Using the Sheet Matcher
+1. Click the **"Excel Sheet Matcher"** card on the home page
+2. Upload your Excel files using drag & drop or browse
+3. Select at least **2 columns** to compare
+4. Adjust the similarity threshold (default 75%)
+5. Click **"Run Fuzzy Match"**
+6. Filter, search, and export your results
 
-### Step 2 — Select Columns
-1. For each uploaded file, you'll see its available columns listed as clickable chips
-2. If a file has multiple sheets, use the dropdown to switch between them
-3. Click on the columns you want to compare (they get a checkmark when selected)
-4. **You need at least 2 columns selected** to run the comparison
+### Using the Excel Merger
+1. Click the **"Multiple Excel Merger"** card
+2. Upload **2+ files** to merge
+3. Choose a merge mode:
+   - **Append Rows** — stack all data into one sheet
+   - **Separate Sheets** — each file becomes a sheet
+   - **Merge by Key** — join files by a common column
+4. Click **"Merge Files"**
+5. Download the merged output
 
-### Step 3 — Configure & Run
-1. Adjust the **similarity threshold** slider:
-   - **75%** (default) — good balance for catching typos
-   - **85%+** — stricter, only near-identical values
-   - **50-70%** — looser, catches more but may include false positives
-2. Click **🔍 Run Fuzzy Match**
-3. View results in the interactive table
-
-### Step 4 — Analyze & Export
-1. Use **filter tabs** to focus on exact, fuzzy, or unmatched results
-2. Use the **search bar** to find specific values
-3. Look at the **diff highlighting** to see exactly which characters differ
-4. Click **📥 Export to Excel** to download results
+### Using the VLOOKUP
+1. Click the **"Excel VLOOKUP"** card
+2. Upload your **source file** (has the values to look up) and **target file** (has the data to pull)
+3. Select the **Lookup Column** from the source
+4. Select the **Key Column** from the target
+5. Select which **Return Columns** to pull
+6. Toggle fuzzy matching on/off and set threshold
+7. Click **"Run VLOOKUP"**
+8. View and export your enriched results
 
 ---
 
 ## 📝 License
 
 This project is open source and available for personal and commercial use.
-# exel-match
